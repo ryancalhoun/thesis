@@ -1,0 +1,138 @@
+%\documentclass[12pt,letterpaper,twoside]{report}
+\documentclass[12pt,letterpaper]{report}
+\linespread{1.67} % Linespacing for entire thesis
+% Standard packages
+\usepackage{graphicx} % PostScript figures
+\usepackage[centertags,fleqn]{amsmath}
+\usepackage{amsfonts} 
+\usepackage{amsbsy}
+\usepackage{amssymb}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{amsthm,amstext}
+\usepackage{newlfont} 
+%\usepackage[hang]{subfigure} \usepackage{portland}
+\usepackage{multirow}
+\usepackage{verbatim}
+\usepackage{url}
+\usepackage{euscript}
+\usepackage{algorithmic}
+%\usepackage{dashbox}
+\usepackage{setspace} % 1.5 spacing
+\usepackage{longtable}
+\usepackage[fancyhdr]{UMCCsThesis} % Thesis style
+\usepackage{color}
+\usepackage{float}
+\floatstyle{ruled}
+%\newfloat{algorithm}{htbp}{loa}
+%\floatname{algorithm}{Algorithm}
+\usepackage{upgreek,fontenc}
+\usepackage[retainorgcmds]{IEEEtrantools}
+
+%\usepackage{parsetree}
+
+\hyphenpenalty=100
+\tolerance=5000
+
+
+% Defines name, thesis title, etc.
+\usepackage{myowndef}
+\include{myeqns}
+
+%Define some commonly used macros here
+\newcommand{\nl}{\newline\indent} 
+\renewcommand{\algorithmiccomment}[1]{ //\texttt{#1}}
+\newcommand{\ac}{\algorithmiccomment}
+\def\headrulehook{\color{black}} % Color the header rule
+
+% Line spacing -----------------------------------------------------------
+\newlength{\defbaselineskip}
+\setlength{\defbaselineskip}{\baselineskip}
+\newcommand{\setlinespacing}[1]%
+           {\setlength{\baselineskip}{#1 \defbaselineskip}}
+\renewcommand{\doublespacing}{\setlength{\baselineskip}%
+                           {1.0 \defbaselineskip}}
+\renewcommand{\singlespacing}{\setlength{\baselineskip}{\defbaselineskip}}
+
+%========= Document start
+\begin {document}
+% Title pages
+\include{chapters/cover}
+%===== Justification, spacing for the main text
+%\raggedbottom
+
+%========= Acknowledgments
+\pagenumbering{roman}
+\typeout{}
+\setcounter{page}{2}
+\addcontentsline{toc}{chapter}{Acknowledgments}
+\include{chapters/acknowledgment}
+
+%========== Tables of contents, figures, tables
+\tableofcontents
+\setcounter{tocdepth}{3}
+\newpage
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\newpage
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+
+%========= List of acronyms
+%\newpage
+%\typeout{}
+%\clearpage
+%\addcontentsline{toc}{chapter}{Acronyms}
+%\include{chapters/acronyms}
+
+%========= Definition of terms
+%\newpage
+%\typeout{}
+%\clearpage
+%\addcontentsline{toc}{chapter}{Definitions}
+%\include{chapters/definitions}
+
+
+%========== Abstract ==============
+\newpage
+\addcontentsline{toc}{chapter}{Abstract}
+\typeout{}
+\clearpage
+\include{chapters/abstract}
+
+
+%========= Main Body ==============
+\cleardoublepage
+\pagenumbering{arabic}
+
+\typeout{}
+\include{chapters/chapter1}
+
+\typeout{}
+\include{chapters/chapter2}
+
+\typeout{}
+\include{chapters/chapter3}
+
+\typeout{}
+\include{chapters/chapter4}
+
+\typeout{}
+\include{chapters/chapter5}
+
+
+%========== Appendices==================
+%\appendix
+
+%========== Bibliography
+\typeout{}
+\linespread{1.0}
+\setlinespacing{1.0}
+\bibliography{chapters/citations.bib}
+\bibliographystyle{IEEEtran}	
+
+%========== VITA
+%\typeout{}
+%\linespread{1.66}
+%\include{chapters/vita}
+\end{document}

@@ -1,0 +1,34 @@
+\documentclass[12pt,letterpaper]{report}
+\usepackage[fancyhdr]{UMCCsThesis} % Thesis style
+\usepackage{setspace}
+\usepackage{myowndef}
+\linespread{1.67} % Linespacing for entire thesis
+\newlength{\defbaselineskip}
+\setlength{\defbaselineskip}{\baselineskip}
+\newcommand{\setlinespacing}[1]%
+           {\setlength{\baselineskip}{#1 \defbaselineskip}}
+\renewcommand{\doublespacing}{\setlength{\baselineskip}%
+                           {1.0 \defbaselineskip}}
+\renewcommand{\singlespacing}{\setlength{\baselineskip}{\defbaselineskip}}
+
+%========= Document start
+\begin {document}
+
+\thispagestyle{empty}
+\smalltitle
+\vspace{20pt}
+\begin{center}
+Ryan J. Calhoun
+\end{center}
+
+\vspace{10pt}
+\begin{center}
+Dr. Jeffrey Uhlmann, Thesis Supervisor 
+\end{center}
+\vspace{5pt}
+\section*{\centering ABSTRACT}
+\vspace{40pt}
+
+\input{chapters/abstract_text}
+\thispagestyle{empty}
+\end{document}

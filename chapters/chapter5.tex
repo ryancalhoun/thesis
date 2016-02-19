@@ -1,0 +1,37 @@
+\chapter{Conclusion}\label{chapter:conclusion}
+
+\section{Discussion}
+
+\PARstart{T}{his thesis} has presented a technique from data fusion called Generalized Covariance Union, an important
+member in the hierarchy of data fusion tools. GCU allows data fusion operations to be performed in the presence of
+possibly correlated and/or spurious input, but its current implementation does not provide a real-time response in
+higher-dimensional state spaces.
+
+GCU can be graphically plotted in such a way as to suggest equivalence with the Minimal Enclosing Ellipsoid of
+Ellipsoids problem, which would allow computational geometry tools to be applied to solve the GCU optimization problem.
+The 1-$\sigma$ contour ellipsoids which uniquely define the Gaussian PDF associated with an error covariance, and the
+covariance-to-ellipsoid transformation given in equation \ref{eqn:cu2e}, are interchangeable, and this provides a
+mechanism for testing whether Generalized CU and MEEE do in fact solve the same problem. The logic outlined in section
+\ref{section:explanation} and the experimental evidence illustrated in examples \ref{ex:gcu1d} and \ref{ex:gcu2d}, and
+in section \ref{section:examples}, suggest that the answer to this question is yes.
+
+
+\section{Future Work}
+
+Although the experimental evidence presented is suggestive, it is not conclusive. Before research on GCU and MEEE can be
+merged, there must be a rigorous proof in place showing that these two techniques are equivalent in any dimensionality.
+Once this proof is established, it will be possible to solve GCU using MEEE algorithms, and vice-versa. The immediate
+benefit will be a direct comparison of software running time of implementations of each technique, leading toward
+improved real-time responses in both domains. Additionally, once it becomes accepted that GCU and MEEE are
+interchangeable, this will allow for further investigation into other relationships between the fields of data fusion
+and computational geometry. Perhaps these relationships exist not only between the two techniques used in this thesis,
+but are in fact an indication of a larger degree of compatibility between two previously unrelated classes of problems.
+
+This thesis contains the first formal analysis of GCU, following its initial presentation to the 9th International
+Conference on Information Fusion in 2006, in~\cite{fusion06}. Planned future work includes a journal article covering
+the GCU--MEEE equivalence. Although past and current research has been hampered by the lack of available tools---e.g. the
+current implementation of CU/GCU is the first of its kind---continuing refinement to the CU/GCU optimization problem
+will no doubt prove invaluable to further study, eventually leading to a robust real-time tool for mainstream data fusion
+applications.
+
+

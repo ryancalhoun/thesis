@@ -1,0 +1,100 @@
+\chapter{Introduction}\label{chapter:introduction}
+
+\section{Background Information}
+
+\PARstart{O}{ver} the last decade, Level-1 information management has matured significantly, with the development of
+rigorous algorithms robust to the effects of unmodeled correlations, and corrupt and/or spurious information, in the
+context of general distributed data fusion networks. Recent inroads into the development of higher level information
+management applications have yielded significant improvements to the data fusion tool called Covariance Union
+(CU)~\cite{uhlmann03,julier05}. CU is used to find the union of a set of input modes or state estimates in a way that
+guarantees an accurate representation of the system's true state in circumstances when other tools may not; simply put,
+it is a method to reduce many modes to one.
+
+A higher level data fusion application is likely manage information in a multimodal scheme, using either Multi
+Hypothesis Tracking (MHT) or a Gaussian Mixture Model (GMM). MHT maintains multiple location and uncertainly estimates
+corresponding to distinct possible states~\cite{barshalom88}. GMM is a parametrization of the Probability Density
+Function (PDF) that describes the uncertainty distribution across the application. Since PDF approximations typically
+only represent the significant modes of the distribution in terms of their mean and covariance, the representation
+differs from that of MHT only in that a GMM interprets each mode as an explicit Gaussian PDF~\cite{fusion06}. Since
+the implementation of these two techniques is identical, this thesis will use the GMM convention, of the form
+  \begin{equation}\label{eqn:gmm}
+    p(\mathbf{x})=\sum_{i=1}^Np_i\gaussN{\mathbf{x};\mu{_i},\sigma_i\sigma_i^T},
+  \end{equation}
+whenever referring to a multimodal state estimate, with the understanding that a Gaussian MHT model will be equivalent.
+
+The fusion of a set $S$ of location and uncertainty estimates---each defining a possible state of the target, only one
+of which is guaranteed to be consistent---with another set $T$ can be accomplished simply by forming the Cartesian
+product $S\times T$ and applying the appropriate fusion algorithm (Kalman or Covariance Intersection) to the pairs.
+Unfortunately, this yields a combined estimate that has $O(|S|*|T|)$ modes, which implies that the complexity of the
+fused estimate exceeds that of the original estimates. This increasing complexity will tend to exhaust available
+resources and therefore must be mitigated. CU can be used to combine modes, instead of pruning those deemed unnecessary
+by some metric, and therefore reduce the information complexity of the fused set in a way that correctly estimates the
+cumulative effect of the remaining modes~\cite{fusion06}.
+
+\section{Notation}
+
+Determining how to represent information and uncertainty, in either a single-target application or a multimodal system,
+is a key first step that impacts all aspects of the data fusion problem. The representation must provide both an
+estimate of the state of the target or system of interest {\em and} its associated degree of error or uncertainty, and
+the uncertainty must be defined in a form that permits it to be empirically determined. There must be a rigorous
+algorithm for fusing information in the representation, and the computational complexity of the representation and its
+associated fusion algorithms must be bounded for practical application~\cite{fusion06}.
+
+By far the most widely used information representation is the mean and covariance form, where the mean vector defines
+the best estimate of the state of the target and the error covariance provides an upper bound on the expected squared
+error associated with the mean. For example, the measured position of an object in two dimensions can be represented as
+a vector $\v{m}$ consisting of the object's estimated mean position, e.g., $\v{m} = [x,y]^T$, and an
+error covariance matrix $\m{M}$ that expresses the uncertainty associated with the estimated mean.  If the error in
+the estimated mean vector is denoted as $\ea$, then the error covariance matrix is an estimate of the expected squared
+error, E$[\ea\ea^T]$. The estimate is said to be {\em consistent} (or conservative) if and only if $\m{M}$ $\geq$
+E$[\ea\ea^T]$ or, equivalently, $\m{M}$ - E$[\ea\ea^T]$ is positive definite or semidefinite (i.e., has no negative
+eigenvalues). The full estimate of a target's state is given by the mean and covariance pair
+$(\v{m},\m{M})$~\cite{fusion06,uhlmann03}. Although the GMM convention explicitly defines its own notation, as in
+equation \ref{eqn:gmm}, the mean and covariance notation will be used throughout this thesis whenever referring to any
+probabilistic estimate.
+
+
+\section{Problem Definition}
+
+Generalized Covariance Union (GCU) forms an important part of the hierarchy of data fusion tools which includes the
+Kalman filter, Covariance Intersection, and the optimal form of CU. Each of these tools is capable of generating a
+consistent result over a set of $n$ input estimates $(\v{m}_i,\m{M}_i)$, given certain preconditions. However, practical
+running times for the current implementation of CU and GCU prohibit the use of these tools in any real-time
+applications (operational cost is roughly proportional to the number of estimates $n$, and the cube of the
+dimensionality of the state space)~\cite{fusion06}.
+
+Research into GCU has revealed a remarkable superficial similarity to the problem of finding a Minimal Enclosing
+Ellipsoid of Ellipsoids (MEEE), a common technique from computational geometry and computer graphics. These two problems
+are very different, in the sense that mean and covariance estimates in tracking and data fusion refer to moments of a
+possibly unknown underlying probability distribution, whereas ellipsoidal intersection and containment involves finite
+volumes of space. Despite any differences between GCU and MEEE in representation and formulation, the similarities
+between the results are suggestive of some level of equivalence.
+
+This thesis will examine the GCU optimization problem and the possible applicability of techniques from computational
+geometry, by presenting evidence that GCU and MEEE techniques may in fact be used to solve the same problem.
+
+
+\section{Organization of Thesis}
+
+
+The organization of this thesis is outlined as follows. Chapter \ref{chapter:introduction} begins by providing background
+information and motivation for the research proposed in this thesis. A definition of the problem is given next, to
+outline the scope of the research.
+
+Work leading up to the research presented here is detailed in Chapter \ref{chapter:gcu}. This chapter will present the
+Kalman filter, Covariance Intersection, and Covariance Union as part of a framework of data fusion tools. Generalized
+Covariance Union is presented here as well, after this framework has been established.
+
+Chapter \ref{chapter:meee} will define the problem of finding a Minimal Enclosing Ellipsoid of Ellipsoids, and give a
+method to test whether a proposed enclosing ellipsoid properly contains its enclosed ellipsoids, as it should. Also given
+in this chapter is a transformation between mean-covariance space and ellipsoid space, in order to provide a way for the
+GCU and MEEE results to be compared.
+
+Chapter \ref{chapter:analysis} will present the results of this research, experimental evidence and mathematical
+analysis that demonstrate the relationship between GCU and MEEE.
+
+This thesis concludes with a summary of accomplishments and dialog for future work in Chapter
+\ref{chapter:conclusion}.
+
+
+
